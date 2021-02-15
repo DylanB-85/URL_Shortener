@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<link rel="shortcut icon" href="#" />
+<title>URL Shortener</title>
+</head>
+<body>
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</header>
+<div class="jumbotron">
+  <div class="container">
+  <h1>URL Shortener</h1>
+    <p>
+    <div class="alert alert-success" role="alert" th:if="${shortenedUrl}"
+      th:utext="'Link created: &lt;a href=\'' + ${shortenedUrl} + '\'&gt;' + ${shortenedUrl} + '&lt;/a&gt;'">
+    </div>
+    <form class="form-inline" th:action="@{/}" th:object="${urlShortenerModel}" method="POST">
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}"
+         th:errors="*{url}">Input is incorrect</div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="url" name="url"
+           placeholder="http://www.example.com"
+           th:field="*{url}" th:class="${#fields.hasErrors('url')}? fieldError"/>
+      </div>
+      <button type="submit" class="btn btn-primary">Shorten URL</button>
+    </form>
+    </p>
+  </div>
+</div>
+</body>
+</html>
